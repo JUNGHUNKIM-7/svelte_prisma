@@ -25,9 +25,9 @@ $size_lg: 2040px;
 
 @mixin hover($ok: true) {
 	@if $ok {
-		@apply border_base hover:bg-green-400;
+		@apply hover:bg-green-400;
 	} @else {
-		@apply border_base hover:bg-red-400;
+		@apply hover:bg-red-400;
 	}
 }
 
@@ -37,10 +37,16 @@ $size_lg: 2040px;
 		@apply bg-slate-100;
 	}
 	button {
-		@apply px-2 py-1;
+		@apply px-2 py-1 border_base;
 	}
 	ul {
 		@apply flex_;
+	}
+	label {
+		@apply block my-1;
+	}
+	input {
+		@apply border_base;
 	}
 }
 

@@ -1,16 +1,14 @@
-import type { ServerLoad } from '@sveltejs/kit';
+import { error, type ServerLoad } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { parseToObject, type Register } from '../util/helpers';
+import { parseToObject, type Login, type Register } from '../util/helpers';
 import { client } from '$lib/prisma_client/seed';
 
 export const load = (async ({ params }) => {
-    return {
-        users: await client.user.findMany()
-    };
+    return { user: true }
 }) satisfies ServerLoad;
 
 export const actions: Actions = {
-    default: async ({ request }) => {
+    register: async ({ request }) => {
         const formData = await request.formData();
         const user: Register = parseToObject(formData);
         delete user['password']
@@ -19,5 +17,22 @@ export const actions: Actions = {
                 ...user
             }
         });
+    },
+
+    login: async ({ request }) => {
+        const formData = await request.formData();
+        const user: Login = parseToObject(formData);
+        delete user['password']
+        const found = await client.user.findUnique({
+            where: {
+                email: user.email,
+            },
+        });
+        if (!found) {
+            throw error(404, {
+                message: "user not found"
+            })
+        }
+        return { success: "true" }
     }
 };

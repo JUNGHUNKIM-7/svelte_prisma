@@ -1,16 +1,18 @@
 <script lang="ts">
 	import Form from '../component/Form.svelte';
-	import type { PageData } from './$types';
+	import { userStore } from '../util/store';
+	import type { ActionData, PageData } from './$types';
 	export let data: PageData;
+	export let form: ActionData;
+	userStore.set(data.user ? true : false);
 </script>
 
-<div class="grid_">
-	{#each data.users as user}
-		{user.email}
-		{user.name}
-	{/each}
+<div>
 	<Form />
 </div>
+{#if form?.success && $userStore}
+	<p>user loggined!</p>
+{/if}
 
 <style lang="scss">
 </style>
