@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//sass declaration
+$size_sm: 600px;
+$size_md: 1080px;
+$size_lg: 2040px;
+
+@mixin mq($size: 'lg') {
+	@if $size == 'sm' {
+		@media only screen and (min-width: $size_sm) {
+			@content;
+		}
+	} @else if size == 'md' {
+		@media only screen and (min-width: $size_md) {
+			@content;
+		}
+	} @else {
+		@media only screen and (min-width: $size_lg) {
+			@content;
+		}
+	}
+}
+
+@mixin hover($ok: true) {
+	@if $ok {
+		@apply border_base hover:bg-green-400;
+	} @else {
+		@apply border_base hover:bg-red-400;
+	}
+}
+
+//tailwind section
+@layer base {
+	body {
+		@apply bg-slate-100;
+	}
+	button {
+		@apply px-2 py-1;
+	}
+	ul {
+		@apply flex_;
+	}
+}
+
+@layer components {
+	.flex_ {
+		@apply flex_base;
+		@include mq('sm') {
+			@apply flex_base;
+		}
+		@include mq('md') {
+			@apply flex_base;
+		}
+		@include mq() {
+			@apply flex_base;
+		}
+	}
+	.grid_ {
+		@apply grid_base grid-cols-2;
+		@include mq('sm') {
+			@apply grid_base grid-cols-4;
+		}
+		@include mq('md') {
+			@apply grid_base grid-cols-6;
+		}
+		@include mq() {
+			@apply grid_base grid-cols-10;
+		}
+	}
+}
+
+@layer utilities {
+	.flex_base {
+		@apply flex flex-wrap;
+	}
+	.grid_base {
+		@apply grid gap-4;
+	}
+	.border_base {
+		@apply rounded-sm border border-gray-800;
+	}
+	.btn_ok {
+		@include hover();
+	}
+	.btn_no {
+		@include hover(false);
+	}
+}
