@@ -11,10 +11,10 @@
 	<nav>
 		<ul>
 			<li>
-				<Navi where="home" />
+				<Navi/>
 			</li>
 			<li>
-				<Navi where="about" />
+				<Navi to="about" />
 			</li>
 		</ul>
 	</nav>

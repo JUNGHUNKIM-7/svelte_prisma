@@ -10,7 +10,7 @@ export const load = (async ({ params }) => {
 export const actions: Actions = {
 	register: async ({ request }) => {
 		const formData = await request.formData();
-		const user: Register = parseToObject(formData);
+		const user = parseToObject<Register>(formData);
 		delete user['password'];
 		await client.user.create({
 			data: {
@@ -22,7 +22,7 @@ export const actions: Actions = {
 
 	login: async ({ request }) => {
 		const formData = await request.formData();
-		const user: Login = parseToObject(formData);
+		const user = parseToObject<Login>(formData);
 		delete user['password'];
 		const found = await client.user.findUnique({
 			where: {

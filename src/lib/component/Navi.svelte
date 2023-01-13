@@ -1,13 +1,13 @@
 <script lang="ts">
 	const navis = {
-		home: '/',
-		about: '/about'
+		home: ['home', '/'],
+		about: ['abount', '/about']
 	};
 
 	type Navis = keyof typeof navis;
-	export let where: Navis = 'home';
+	export let to: Navis = 'home';
 </script>
 
-<a href={navis[where]}>
-	<slot>no_named link</slot>
+<a href={navis[to].at(-1)}>
+	<slot>{navis[to].at(0)}</slot>
 </a>

@@ -20,12 +20,10 @@ export interface Login extends Form {}
 type K = 'email' | 'password';
 type KeyType<T extends Register | Login, U extends K> = keyof Pick<T, U>;
 
-export default function parseToObject(formData: FormData): Login;
-export default function parseToObject(formData: FormData): Register;
 export default function parseToObject<T extends Register | Login>(
 	formData: FormData,
 	address?: Address
-): Login | Register {
+): T {
 	const fields = {} as T;
 	const defaultMap: Address = {
 		street: '',
