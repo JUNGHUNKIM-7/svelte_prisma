@@ -11,7 +11,7 @@
 	<nav>
 		<ul>
 			<li>
-				<Navi/>
+				<Navi />
 			</li>
 			<li>
 				<Navi to="about" />

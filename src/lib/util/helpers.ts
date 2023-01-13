@@ -25,14 +25,15 @@ export default function parseToObject<T extends Register | Login>(
 	address?: Address
 ): T {
 	const fields = {} as T;
-	const defaultMap: Address = {
-		street: '',
-		city: '',
-		state: '',
-		zip: ''
-	};
 	if (address) {
-		(fields as T as Register)['address'] = address ? address : defaultMap;
+		(fields as T as Register)['address'] = address
+			? address
+			: {
+					street: '',
+					city: '',
+					state: '',
+					zip: ''
+			  };
 	}
 	for (let [k, v] of [...formData]) {
 		if (!(k in fields)) {
