@@ -1,7 +1,7 @@
 import { error, type ServerLoad } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import parseToObject, { type Login, type Register } from '../util/helpers';
-import { client } from '$lib/prisma_client/seed';
+import parseToObject, { type Login, type Register } from '$lib/util/helpers';
+import { client } from '$lib/util/seed';
 
 export const load = (async ({ params }) => {
 	return { user: true };

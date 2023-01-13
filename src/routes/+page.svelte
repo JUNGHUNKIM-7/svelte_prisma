@@ -1,17 +1,15 @@
 <script lang="ts">
-	import Form from '../component/Form.svelte';
-	import { userStore } from '../util/store';
+	import Form from '$lib/component/Form.svelte';
+	import { userStore } from '$lib/util/store';
 	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
 	export let form: ActionData;
 
-	userStore.set(data.user ? true : false);
+	userStore.set(data.user);
 </script>
 
-<div>
-	<Form />
-</div>
+<Form />
 {#if form?.success && $userStore}
 	<p>user loggined!</p>
 {/if}
